@@ -19,7 +19,6 @@ A web-based DICOM Viewer built with React, TypeScript, and Cornerstone3D (versio
 There are two routes:
 
 1. `/` which shows a volume viewport - to make sure the Cornerstone3D is working.
-2. `/polySeg` which shows the contour to labelmap conversion - to make sure the custom WASM, worker, and the conversion are working.
 
 ## Prerequisites
 
