@@ -2,10 +2,6 @@
 
 A web-based DICOM Viewer built with React, TypeScript, and Cornerstone3D (version 2.0.beta), allowing users to view, navigate, and interact with DICOM medical images. Features include drag-and-drop file loading, image navigation (Previous/Next), and interactive tools (Zoom, Pan, Window Level) with user-friendly feedback via toast notifications. This is a template for a simple Next.js project with TypeScript, ESLint, Prettier, utilizing the [Cornerstone3D](https://github.com/cornerstonejs/cornerstone3D-beta) library for rendering.
 
-## NOTE
-
-We are using Cornerstone3D version 2.0.beta, which is not yet released and is still in development.
-
 ## Features
 
 - **Drag-and-Drop File Loading**: Upload DICOM (`.dcm`) files by dragging and dropping them into the app.
@@ -37,9 +33,9 @@ Before running the application locally, ensure you have the following installed:
 Follow these steps to set up and run the DICOM Viewer on your local machine:
 
 1. **Clone the Repository**:  
-   git clone [your-repository-link]
+   git clone https://github.com/EjiroOsiephri/DICOM-Viewer.git
 
-cd dicom-viewer
+cd DICOM-Viewer
 
 2. **Install Dependencies**:  
    Install the required Node.js packages using npm:
@@ -69,10 +65,6 @@ This will start the app on `http://localhost:3000` (or another port if 3000 is i
   - **Pan**: Click and drag to move the image.
   - **Window Level**: Click and drag left/right to adjust contrast, up/down to adjust brightness.
 - Check the console (F12 > Console) for logs if you encounter issues.
-
-## Lib
-
-The `lib` folder contains custom loading scripts to read data from the server. These scripts are boilerplate code for reading metadata, adding instances, and other related tasks. Note that building an entire viewer is often much more complicated. You might want to explore the [OHIF project](https://github.com/OHIF/Viewers/) for a comprehensive solution.
 
 ## Libraries and Tools Used
 

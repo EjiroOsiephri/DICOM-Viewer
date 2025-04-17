@@ -34,6 +34,20 @@ export default function DicomViewer() {
   const elementRef = useRef<HTMLDivElement>(null);
   const renderingEngineRef = useRef<RenderingEngine | null>(null);
   const running = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1440);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     const setup = async () => {
@@ -201,14 +215,16 @@ export default function DicomViewer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-gray-200 flex"
+      className="min-h-screen bg-gradient-to-br mt-5 mb-5 from-gray-900 to-gray-800 mx-32 text-gray-200 flex flex-col "
     >
-      {/* Sidebar */}
+      {/* Sidebar - will be on top on mobile */}
       <motion.div
-        initial={{ x: -100, opacity: 0 }}
+        initial={{ x: isMobile ? 0 : -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
-        className="w-80 p-6 bg-gray-800/90 backdrop-blur-md border-r border-gray-700 flex flex-col space-y-6"
+        className={`${
+          isMobile ? "w-full" : "w-full"
+        } p-4 lg:p-6 bg-gray-800/90 backdrop-blur-md border-b lg:border-r border-gray-700 flex flex-col space-y-4 lg:space-y-6`}
       >
         <h2 className="text-xl font-semibold text-blue-400">DICOM Viewer</h2>
 
@@ -242,7 +258,7 @@ export default function DicomViewer() {
             <motion.button
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              className="flex-1 p-3 bg-blue-600 text-white rounded-lg disabled:opacity-50 shadow-md"
+              className="flex-1 p-2 lg:p-3 bg-blue-600 text-white rounded-lg disabled:opacity-50 shadow-md"
               whileHover={{ scale: 1.05, backgroundColor: "#60A5FA" }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -252,7 +268,7 @@ export default function DicomViewer() {
             <motion.button
               onClick={handleNext}
               disabled={currentIndex === imageIds.length - 1}
-              className="flex-1 p-3 bg-blue-600 text-white rounded-lg disabled:opacity-50 shadow-md"
+              className="flex-1 p-2 lg:p-3 bg-blue-600 text-white rounded-lg disabled:opacity-50 shadow-md"
               whileHover={{ scale: 1.05, backgroundColor: "#60A5FA" }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -271,20 +287,26 @@ export default function DicomViewer() {
         </motion.div>
       </motion.div>
 
+      {/* Main image viewport - will be below sidebar on mobile */}
       <motion.div
-        className="flex-1 p-6 flex items-center justify-center"
+        className="flex-1 p-4 lg:p-6 flex items-center justify-center"
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
       >
         <motion.div
           className="relative bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-700"
-          whileHover={{ scale: 1.01 }}
+          whileHover={{ scale: isMobile ? 1 : 1.01 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
-          <div ref={elementRef} className="w-[800px] h-[600px] rounded-xl" />
+          <div
+            ref={elementRef}
+            className={`${
+              isMobile ? "w-[90vw] h-[70vh]" : "w-[800px] h-[600px]"
+            } rounded-xl`}
+          />
           <motion.div
-            className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm p-3 rounded-lg text-sm font-medium text-gray-300 pointer-events-none"
+            className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm p-2 lg:p-3 rounded-lg text-sm font-medium text-gray-300 pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.5 }}

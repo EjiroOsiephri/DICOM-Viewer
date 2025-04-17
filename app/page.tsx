@@ -6,7 +6,7 @@ const DicomViewer = dynamic(() => import("../components/DicomViewer"), {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex justify-around min-h-screen flex-col items-center">
       <DicomViewer />
     </main>
   );
