@@ -2,6 +2,8 @@
 
 A web-based DICOM Viewer built with React, TypeScript, and Cornerstone3D (version 2.0.beta), allowing users to view, navigate, and interact with DICOM medical images. Features include drag-and-drop file loading, image navigation (Previous/Next), and interactive tools (Zoom, Pan, Window Level) with user-friendly feedback via toast notifications. This is a template for a simple Next.js project with TypeScript, ESLint, Prettier, utilizing the [Cornerstone3D](https://github.com/cornerstonejs/cornerstone3D-beta) library for rendering.
 
+The lib file contains the utilities file and the reusable components.
+
 ## Features
 
 - **Drag-and-Drop File Loading**: Upload DICOM (`.dcm`) files by dragging and dropping them into the app.
